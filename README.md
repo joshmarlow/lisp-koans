@@ -1,3 +1,10 @@
+NOTE
+----
+
+I (joshmarlow) have forked this repo so I could save my progress on solving the koans
+(and, of course, keep the solutions as a quick reference as I learn).  Therefore, this is not the repo
+you are looking for; checkout (https://github.com/google/lisp-koans).
+
 Getting Started
 ---------------
 

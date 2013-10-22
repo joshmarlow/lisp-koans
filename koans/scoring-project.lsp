@@ -50,8 +50,28 @@
 ; Your goal is to write the score method.
 
 (defun score (dice)
-  ; You need to write this method
-)
+    (let ((the-score 0)
+          (uniques))
+        (defun inc-for-x (x set-of-three-value remainder-value)
+            (let ((x-count (count x dice)))
+              (if (>= x-count 3)
+                (progn
+                  (incf the-score set-of-three-value)
+                  (incf the-score (* (- x-count 3) remainder-value)))
+                (incf the-score (* x-count remainder-value)))))
+
+        ;; compute the uniques
+        (dolist (x dice)
+          (unless (member x uniques)
+            (push x uniques)))
+
+        (dolist (x uniques)
+            (case x
+                (1 (inc-for-x 1 1000 100))
+                (5 (inc-for-x x (* x 100) 50))
+                (t (inc-for-x x (* x 100) 0))))
+        the-score))
+
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))

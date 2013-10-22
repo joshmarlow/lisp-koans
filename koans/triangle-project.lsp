@@ -18,7 +18,18 @@
 (define-condition triangle-error  (error) ())
 
 (defun triangle (a b c)
-  :write-me)
+    (when (or (not (plusp a)) (not (plusp b)) (not (plusp c)))
+        (error 'triangle-error))
+    (when (or (>= a (+ b c)) (>= b (+ a c)) (>= c (+ a b)))
+        (error 'triangle-error))
+    (let ((sides (make-hash-table :test #'equal)))
+          (setf (gethash a sides) :side-1)
+          (setf (gethash b sides) :side-2)
+          (setf (gethash c sides) :side-3)
+          (case (hash-table-count sides)
+            (1 :equilateral)
+            (2 :isosceles)
+            (3 :scalene))))
 
 
 (define-test test-equilateral-triangles-have-equal-sides
